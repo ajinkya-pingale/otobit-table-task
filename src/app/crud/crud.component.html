@@ -1,0 +1,85 @@
+<div class="mainDiv">
+  <table *ngIf="productList.length > 0">
+    <tr>
+      <th>
+        Index
+        <i
+          class="fa fa-sort-numeric-asc"
+          *ngIf="filterOptions['ProductId'] == 0"
+          (click)="addFilter('ProductId', 1)"
+          aria-hidden="true"
+        ></i>
+        <i
+          class="fa fa-sort-numeric-desc"
+          *ngIf="filterOptions['ProductId'] == 1"
+          (click)="addFilter('ProductId', 0)"
+          aria-hidden="true"
+        ></i>
+      </th>
+      <th>
+        Product Name
+        <i
+          class="fa fa-sort-alpha-asc"
+          *ngIf="filterOptions['ProductName'] == 0"
+          (click)="addFilter('ProductName', 1)"
+          aria-hidden="true"
+        ></i>
+        <i
+          class="fa fa-sort-alpha-desc"
+          *ngIf="filterOptions['ProductName'] == 1"
+          (click)="addFilter('ProductName', 0)"
+          aria-hidden="true"
+        ></i>
+      </th>
+      <th>
+        Category
+        <i
+          class="fa fa-sort-alpha-asc"
+          *ngIf="filterOptions['Category'] == 0"
+          (click)="addFilter('Category', 1)"
+          aria-hidden="true"
+        ></i>
+        <i
+          class="fa fa-sort-alpha-desc"
+          *ngIf="filterOptions['Category'] == 1"
+          (click)="addFilter('Category', 0)"
+          aria-hidden="true"
+        ></i>
+      </th>
+      <th>
+        Price
+        <i
+          class="fa fa-sort-numeric-asc"
+          *ngIf="filterOptions['Price'] == 0"
+          (click)="addFilter('Price', 1)"
+          aria-hidden="true"
+        ></i>
+        <i
+          class="fa fa-sort-numeric-desc"
+          *ngIf="filterOptions['Price'] == 1"
+          (click)="addFilter('Price', 0)"
+          aria-hidden="true"
+        ></i>
+      </th>
+    </tr>
+
+    <tr *ngFor="let eachProduct of productList; let i = index">
+      <td>{{ eachProduct?.ProductId }}</td>
+      <td>{{ eachProduct?.ProductName }}</td>
+      <td>{{ eachProduct?.Category }}</td>
+      <td>{{ eachProduct?.Price }}</td>
+    </tr>
+
+    <tfoot>
+      <td colspan="3">Total Records</td>
+      <td>{{productList.length}}</td>
+    </tfoot>
+  </table>
+  <div class="spinnerDiv" *ngIf="loaderFlag">
+    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+  </div>
+</div>
+
+<div class="errorMessage">
+  <span>{{ productApiError }}</span>
+</div>
